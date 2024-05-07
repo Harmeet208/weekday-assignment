@@ -18,7 +18,9 @@ import { fetchJobs } from './requestUtility';
 
 const AppContainer = () => {
     const [jobs, setJobs] = useState([]);
+    // eslint-disable-next-line
     const [totalCount, setTotalCount] = useState(0);
+    // eslint-disable-next-line
     const [offset, setOffset] = useState(0);
     const [limit] = useState(10);
     const [filters, setFilters] = useState({
@@ -36,7 +38,8 @@ const AppContainer = () => {
             setJobs((prevJobs) => [...prevJobs, ...result.jdList]);
             setTotalCount(result.totalCount);
         }) 
-        .catch((error) => console.error(error));;
+        .catch((error) => console.error(error));
+    // eslint-disable-next-line
     }, [offset]);
 
     //   const handleScroll = (e) => {
@@ -145,7 +148,7 @@ const AppContainer = () => {
                                     {job.role}
                                 </Typography>
                                 <div className='company-details'>
-                                    <img className='company-details-logo' src={job.logoUrl} />
+                                    <img className='company-details-logo' src={job.logoUrl} alt={'company-logo'} />
                                     <div className='role-details'>
                                         <h3>
                                             {job.companyName}
