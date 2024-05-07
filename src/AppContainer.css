@@ -1,0 +1,48 @@
+#btn-primary{
+    background-color: rgb(85, 239, 196);
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    padding: 8px 18px;
+    margin-right: 8px;
+}
+#btn-secondary{
+    background-color: rgb(85, 90, 239);
+    font-weight: 600;
+    padding: 8px 18px;
+}
+#bolt-icon{
+    color: #fd0;
+}
+
+.company-details > img{
+    height: 40px;
+    border-radius: 5px;
+}
+
+.role-details>h3{
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 3px;
+    color: #8b8b8b;
+    text-transform: capitalize;
+}
+.role-details>h4{
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #8b8b8b;
+    text-transform: uppercase;
+}
+
+.company-details {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.cards-sub-text {
+    font-size: 11px;
+    font-weight: 500;
+    margin-top: 5px;
+    text-transform: capitalize;
+}
