@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './AppContainer.css';
 import {
-    Card,
-    CardContent,
-    Typography,
     Grid,
-    Button,
-    Box,
     TextField,
     MenuItem,
     Select,
     FormControl,
     InputLabel
 } from '@mui/material';
-import BoltIcon from '@mui/icons-material/Bolt';
-import { fetchJobs } from './requestUtility';
+import { fetchJobs } from './utilities/requestUtility';
+import JobCard from './JobCard';
+import { experienceFilterList } from './utilities/ArrayList';
 
 const AppContainer = () => {
     const [jobs, setJobs] = useState([]);
@@ -65,7 +61,7 @@ const AppContainer = () => {
             minBasePay,
         } = filters;
         return (
-            (!minExperience || job.experience >= minExperience) &&
+            (!minExperience || job.minExperience >= minExperience) &&
             (!companyName ||
                 job.companyName.toLowerCase().includes(companyName.toLowerCase())) &&
             (!location || job.location.toLowerCase().includes(location.toLowerCase())) &&
@@ -88,12 +84,7 @@ const AppContainer = () => {
                         onChange={handleFilterChange}
                     >
                         <MenuItem value="">None</MenuItem>
-                        <MenuItem value="0">0 Years</MenuItem>
-                        <MenuItem value="1">1 Year</MenuItem>
-                        <MenuItem value="2">2 Years</MenuItem>
-                        <MenuItem value="3">3 Years</MenuItem>
-                        <MenuItem value="4">4 Years</MenuItem>
-                        <MenuItem value="5">5 Years</MenuItem>
+                        {experienceFilterList.map(el=><MenuItem value={`${el}`}>{el} Years</MenuItem>)}
                     </Select>
                 </FormControl>
                 <TextField
@@ -141,44 +132,7 @@ const AppContainer = () => {
             </div>
             <Grid container spacing={5}>
                 {filteredJobs.map((job, index) => (
-                    <Grid item xs={12} sm={6} md={4} key={index}>
-                        <Card>
-                            <CardContent>
-                                <Typography variant="h6">
-                                    {job.role}
-                                </Typography>
-                                <div className='company-details'>
-                                    <img className='company-details-logo' src={job.logoUrl} alt={'company-logo'} />
-                                    <div className='role-details'>
-                                        <h3>
-                                            {job.companyName}
-                                        </h3>
-                                        <h4>
-                                            {job.jobRole}
-                                        </h4>
-                                    </div>
-                                </div>
-                                <p className='cards-sub-text'>{job.location}</p>
-                                <Typography
-                                    variant="body2"
-                                    title={job.jobDetailsFromCompany}
-                                >
-                                    {job.jobDetailsFromCompany}
-                                </Typography>
-                                <Typography variant="body2" color="textSecondary">
-                                    Minimum Experience: {job.minExp ? `${job.minExp} Years` : "N/A"}
-                                </Typography>
-                                <Box>
-                                    <Button startIcon={<BoltIcon id='bolt-icon' />} variant="contained" id='btn-primary'>
-                                        Easy Apply
-                                    </Button>
-                                    <Button variant="contained" id='btn-secondary'>
-                                        Unlock Referral Asks
-                                    </Button>
-                                </Box>
-                            </CardContent>
-                        </Card>
-                    </Grid>
+                    <JobCard job={job} index={index} />
                 ))}
             </Grid>
         </div>
