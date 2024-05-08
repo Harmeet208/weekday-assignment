@@ -6,7 +6,9 @@ import {
     MenuItem,
     Select,
     FormControl,
-    InputLabel
+    InputLabel,
+    Container,
+    Box
 } from '@mui/material';
 import { fetchJobs } from './utilities/requestUtility';
 import JobCard from './JobCard';
@@ -74,9 +76,9 @@ const AppContainer = () => {
     });
 
     return (
-        <div>
-            <div>
-                <FormControl>
+        <Container maxWidth="xl">
+            <div className='filter-div' style={{margin: "24px 0px"}}>
+                <FormControl sx={{ minWidth: 170 }} size="small">
                     <InputLabel>Min Experience</InputLabel>
                     <Select
                         name="minExperience"
@@ -88,18 +90,20 @@ const AppContainer = () => {
                     </Select>
                 </FormControl>
                 <TextField
+                    size="small"
                     name="companyName"
                     label="Company Name"
                     value={filters.companyName}
                     onChange={handleFilterChange}
                 />
                 <TextField
+                    size="small"
                     name="location"
                     label="Location"
                     value={filters.location}
                     onChange={handleFilterChange}
                 />
-                <FormControl>
+                <FormControl sx={{ minWidth: 170 }} size="small">
                     <InputLabel>Remote/On-site</InputLabel>
                     <Select
                         name="remote"
@@ -112,30 +116,33 @@ const AppContainer = () => {
                     </Select>
                 </FormControl>
                 <TextField
+                    size="small"
                     name="techStack"
                     label="Tech Stack"
                     value={filters.techStack}
                     onChange={handleFilterChange}
                 />
                 <TextField
+                    size="small"
                     name="role"
                     label="Role"
                     value={filters.role}
                     onChange={handleFilterChange}
                 />
                 <TextField
+                    size="small"
                     name="minBasePay"
                     label="Min Base Pay"
                     value={filters.minBasePay}
                     onChange={handleFilterChange}
                 />
             </div>
-            <Grid container spacing={5}>
+            <Grid container spacing={10}>
                 {filteredJobs.map((job, index) => (
                     <JobCard job={job} index={index} />
                 ))}
             </Grid>
-        </div>
+        </Container>
     );
 };
 
