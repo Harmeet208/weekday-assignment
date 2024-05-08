@@ -2,16 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './AppContainer.css';
 import {
     Grid,
-    TextField,
-    MenuItem,
-    Select,
-    FormControl,
-    InputLabel,
     Container
 } from '@mui/material';
 import { fetchJobs } from './utilities/requestUtility';
 import JobCard from './JobCard';
-import { experienceFilterList } from './utilities/ArrayList';
+import JobFilters from './JobFilters';
 
 const AppContainer = () => {
     const [jobs, setJobs] = useState([]);
@@ -19,7 +14,7 @@ const AppContainer = () => {
     const [totalCount, setTotalCount] = useState(0);
     // eslint-disable-next-line
     const [offset, setOffset] = useState(0);
-    const [limit] = useState(9);
+    const [limit] = useState(947);
     const [filters, setFilters] = useState({
         minExperience: '',
         companyName: '',
@@ -54,90 +49,26 @@ const AppContainer = () => {
             minExperience,
             companyName,
             location,
-            remote,
-            techStack,
             role,
             minBasePay,
         } = filters;
         return (
-            (!minExperience || job.minExperience >= minExperience) &&
+            (!minExperience || job.minExp >= minExperience) &&
             (!companyName ||
                 job.companyName.toLowerCase().includes(companyName.toLowerCase())) &&
             (!location || job.location.toLowerCase().includes(location.toLowerCase())) &&
-            (!remote || job.remote.toString() === remote) &&
-            (!techStack ||
-                job.techStack.toLowerCase().includes(techStack.toLowerCase())) &&
-            (!role || job.role.toLowerCase().includes(role.toLowerCase())) &&
-            (!minBasePay || job.minBasePay >= minBasePay)
+            (!role || job.jobRole.toLowerCase().includes(role.toLowerCase())) &&
+            (!minBasePay || job.minJdSalary >= minBasePay)
         );
     });
 
     return (
         <Container maxWidth="xl">
-            <div className='filter-div' style={{margin: "24px 0px"}}>
-                <FormControl sx={{ minWidth: 170 }} size="small">
-                    <InputLabel>Min Experience</InputLabel>
-                    <Select
-                        name="minExperience"
-                        value={filters.minExperience}
-                        onChange={handleFilterChange}
-                    >
-                        <MenuItem value="">None</MenuItem>
-                        {experienceFilterList.map(el=><MenuItem value={`${el}`}>{el} Years</MenuItem>)}
-                    </Select>
-                </FormControl>
-                <TextField
-                    size="small"
-                    name="companyName"
-                    label="Company Name"
-                    value={filters.companyName}
-                    onChange={handleFilterChange}
-                />
-                <TextField
-                    size="small"
-                    name="location"
-                    label="Location"
-                    value={filters.location}
-                    onChange={handleFilterChange}
-                />
-                <FormControl sx={{ minWidth: 170 }} size="small">
-                    <InputLabel>Remote/On-site</InputLabel>
-                    <Select
-                        name="remote"
-                        value={filters.remote}
-                        onChange={handleFilterChange}
-                    >
-                        <MenuItem value="">None</MenuItem>
-                        <MenuItem value="true">Remote</MenuItem>
-                        <MenuItem value="false">On-site</MenuItem>
-                    </Select>
-                </FormControl>
-                <TextField
-                    size="small"
-                    name="techStack"
-                    label="Tech Stack"
-                    value={filters.techStack}
-                    onChange={handleFilterChange}
-                />
-                <TextField
-                    size="small"
-                    name="role"
-                    label="Role"
-                    value={filters.role}
-                    onChange={handleFilterChange}
-                />
-                <TextField
-                    size="small"
-                    name="minBasePay"
-                    label="Min Base Pay"
-                    value={filters.minBasePay}
-                    onChange={handleFilterChange}
-                />
-            </div>
+            <JobFilters filters={filters} handleFilterChange={handleFilterChange} />
             {/* grid to show code */}
             <Grid container spacing={16}>
                 {filteredJobs.map((job, index) => (
-                    <JobCard job={job} index={index} />
+                    <JobCard job={job} index={index} key={index} />
                 ))}
             </Grid>
         </Container>
