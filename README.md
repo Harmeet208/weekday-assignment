@@ -1,5 +1,5 @@
 # Getting Started with Create React App
-The following project is being hosted at - https://timely-pika-53f626.netlify.app/
+The following project is being hosted at - https://weekday-assignment-clone.netlify.app/
 
 # To run the project - 
 Pre-requisites - 
