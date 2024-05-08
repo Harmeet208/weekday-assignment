@@ -7,8 +7,7 @@ import {
     Select,
     FormControl,
     InputLabel,
-    Container,
-    Box
+    Container
 } from '@mui/material';
 import { fetchJobs } from './utilities/requestUtility';
 import JobCard from './JobCard';
@@ -137,7 +136,7 @@ const AppContainer = () => {
                     onChange={handleFilterChange}
                 />
             </div>
-            <Grid container spacing={10}>
+            <Grid container spacing={16}>
                 {filteredJobs.map((job, index) => (
                     <JobCard job={job} index={index} />
                 ))}

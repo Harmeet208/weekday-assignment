@@ -32,13 +32,26 @@ const JobCard = (props) => {
                 </div>
                 <Typography
                     variant="body2"
+                    className='salary'
+                >
+                    Estimated Salary: {`₹ ${job.minJdSalary ?? 0} - ${job.maxJdSalary} LPA`}
+                </Typography>
+                <Typography variant="body1">
+                    About Company:
+                </Typography>
+                <Typography variant="body2" >
+                    <strong>About Us</strong>
+                </Typography>
+                <Typography
+                    variant="body2"
                     title={job.jobDetailsFromCompany}
                 >
                     {job.jobDetailsFromCompany}
                 </Typography>
-                <Typography variant="body2" color="textSecondary">
-                    Minimum Experience: {job.minExp ? `${job.minExp} Years` : "N/A"}
-                </Typography>
+                <div className='info-container' variant="body2" color="textSecondary">
+                    <h4>Minimum Experience:</h4> 
+                    <h4>{job.minExp ? `${job.minExp} Years` : "N/A"}</h4>
+                </div>
                 <Box>
                     <Button startIcon={<BoltIcon id='bolt-icon' />} variant="contained" id='btn-primary' className="btn">
                         Easy Apply
