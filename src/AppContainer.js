@@ -19,7 +19,7 @@ const AppContainer = () => {
     const [totalCount, setTotalCount] = useState(0);
     // eslint-disable-next-line
     const [offset, setOffset] = useState(0);
-    const [limit] = useState(10);
+    const [limit] = useState(9);
     const [filters, setFilters] = useState({
         minExperience: '',
         companyName: '',
@@ -38,14 +38,12 @@ const AppContainer = () => {
         .catch((error) => console.error(error));
     // eslint-disable-next-line
     }, [offset]);
-
-    //   const handleScroll = (e) => {
-    //     const bottom =
-    //       e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    //     if (bottom && jobs.length < totalCount) {
-    //       setOffset(offset + limit);
-    //     }
-    //   };
+    // Added event to check if user has reached end of the page
+    window.onscroll = function(ev) {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            setOffset(offset + limit);
+        }
+    };
 
     const handleFilterChange = (e) => {
         setFilters({ ...filters, [e.target.name]: e.target.value });
@@ -136,6 +134,7 @@ const AppContainer = () => {
                     onChange={handleFilterChange}
                 />
             </div>
+            {/* grid to show code */}
             <Grid container spacing={16}>
                 {filteredJobs.map((job, index) => (
                     <JobCard job={job} index={index} />
