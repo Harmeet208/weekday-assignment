@@ -14,7 +14,7 @@ const AppContainer = () => {
     const [totalCount, setTotalCount] = useState(0);
     // eslint-disable-next-line
     const [offset, setOffset] = useState(0);
-    const [limit] = useState(947);
+    const [limit] = useState(10);
     const [filters, setFilters] = useState({
         minExperience: '',
         companyName: '',
